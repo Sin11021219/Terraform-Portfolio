@@ -80,10 +80,48 @@ resource "aws_route_table" "public_rtb" {
 #サブネットへの関連付け
 resource "aws_route_table_assosiation" "public_rtb_1a" {
     route_table_id  = aws_route_table.public_rtb.id
-    subnet_id       = aws_subnet_subnet_public1.id
+    subnet_id       = aws_subnet.subnet_public1.id
 }
 
 resource "aws_route_table_assosiation" "public_rtb_1c" {
     route_table_id  = aws_route_table.public_rtb.id
-    subnet_id       = aws_subnet_subnet_public2.id
+    subnet_id       = aws_subnet.subnet_public2.id
+}
+
+#local内に向けるルートテーブル
+resource "aws_route_table" "private_rtb" {
+    vpc_id         = aws_vpc.vpc.id
+    tags = {
+        Name        = "${var.project}-private-rtb"
+        project     = var.project
+        Type        = "private"
+    }
+}
+
+#サブネットへの関連付け
+resource "aws_route_table_assosiation" "private_rtb_1a" {
+    route_table_id    = aws_route_table.private_rtb.id
+    subnet_id         = aws_subnet.subnet_private1.id
+}
+
+resource "aws_route_table_assosiation" "private_rtb_1c" {
+    route_table_id   = aws_route_table.private_rtb.id
+    subnet_id        = aws_subnet.subnet_private2.id
+}
+
+#===================================================================
+#Internet Gateway
+#===================================================================
+resource "aws_internet_gateway" "igw" {
+    vpc_id            = aws_vpc.vpc.id
+    tags = {
+        Name     = "${var.project}-igw"
+        Project  = var.project
+    }
+}
+＃インターネットゲートウェイをどのルートテーブルに指定するのか
+resource "aws_route" "public_rtb_igw_route" {
+    resource_table_id      = aws_route_table.public_rtb.id
+    destination_cidr_block = "0.0.0.0/0"
+    gateway_id             = aws_internet_gateway.gw.id
 }
