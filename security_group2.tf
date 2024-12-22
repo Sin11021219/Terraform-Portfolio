@@ -52,3 +52,67 @@ resource "aws_security_group" "egress_vpc"_endpoint {
     to_port           = "0"
     cidr_blocks       = ["0.0.0.0/0"]
 }
+
+#==================================================================
+#ALB Security Group
+インバウンド: 80, 443
+#===================================================================
+resource "aws_security_group" "alb_sg" {
+    name        = "${var.project}-alb-sg"
+    description = "alb"
+    vpc_id      = aws_vpc.vpc.id
+    tags = {
+        Name    = "${var.project}-alb-sg"
+        project = var.project
+    } 
+}
+
+resource "aws_security_group_rule" "ingress_http_alb" {
+    security_group_id = aws_security_group.alb_sg.id
+    type              = "ingress"
+    protocol          = "tcp"
+    from_port         = "80"
+    to_port           = "80"
+    cidr_blocks       = ["0.0.0.0/0"]
+}
+
+resource "aws_security_group_rule"   "ingress_https_alb" {
+    security_group_id  = aws_security_group.alb_sg.id
+    type               = "ingress"
+    protocol           = "tcp"
+    from_port          = "443"
+    to_port            = "443"
+    cidr_blocks       = ["0.0.0.0/0"]
+}
+
+resource "aws_security_group_rule" "egress_alb" {
+    security_group_id = aws_security_group.alb_sg.id
+    type              = "egress"
+    protocol          = "tcp"
+    from_port         = "80"
+    to_port           = "80"  
+    cidr_blocks       = ["0.0.0.0/0"]
+} 
+
+#=====================================================================
+#EC2 from_alb Security Group
+#=====================================================================
+#EC2がALBのセキュリティグループからのトラフィックを許可するセキュリティグループ
+resource "aws_security_group" "web_sg" {
+    name        = "${var.project}-web-sg"
+    description = "from alb"
+    vpc_id      = aws_vpc.vpc.id
+    tags = {
+        Name = "${var.project}-web-sg"
+
+    }
+}
+
+resource "aws_security_group_rule" "ingress_"from_alb_to_ec2 {
+    security_group_id        = aws_security_group.web_sg.id
+    type                     = "ingress"
+    protocpl                 = "tcp"
+    from_port                = "80"
+    to_port                  = "80"
+    source_security_group_id = aws_security_group.alb_sg.id
+}
