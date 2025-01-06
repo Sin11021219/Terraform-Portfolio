@@ -37,4 +37,5 @@ resource "aws_route53_record" "route53_cloudfront" {
         zone_id                = aws_cloudfront_distribution.cloudfront.hosted_zone_id
         evaluate_target_health = true
     }
+
 }
