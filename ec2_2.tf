@@ -28,6 +28,8 @@ resource "aws_instance" "webserver_ec2_1" {
     }
 }
 
+
+
 #2台目のEC2
 resource "aws_instance" "webserver_ec2_2" {
     ami                         = data.aws_ssm_parameter.aman2_ami.value
@@ -50,11 +52,10 @@ resource "aws_instance" "webserver_ec2_2" {
     }
 }
 
-# Instance Profile
+
+
+# Insatance Profile
 resource "aws_iam_instance_profile" "ssm_instance_profile" {
     role = aws_iam_role.ssm_role.name
     name = aws_iam_role.ssm_role.name
 }
-
-
-
