@@ -119,6 +119,7 @@ resource "aws_internet_gateway" "igw" {
         Project  = var.project
     }
 }
+
 ＃インターネットゲートウェイをどのルートテーブルに指定するのか
 resource "aws_route" "public_rtb_igw_route" {
     resource_table_id      = aws_route_table.public_rtb.id
