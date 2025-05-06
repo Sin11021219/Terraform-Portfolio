@@ -11,6 +11,7 @@ resource "aws_route53_zone" "route53_zone" {
   }
 }
 
+
 #------------------------------------
 # route53 record
 # aws_route53_zoneではホストゾーンに独自ドメインを設定し、
@@ -41,3 +42,4 @@ resource "aws_route53_record" "route53_cloudfront" {
     evaluate_target_health = true
   }
 }
+
