@@ -29,7 +29,6 @@ resource "aws_acm_certificate" "tokyo_cert" {
 }
 
 
-
 # route53のacm.tfに関するリソースが消える記述とする。
 resource "aws_route53_record" "route53_acm_resolve" {
     for_each = {
