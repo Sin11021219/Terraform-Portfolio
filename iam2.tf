@@ -7,7 +7,6 @@ data "aws_iam_policy" "ssm_managed_instancecore" {
   name = "AmazonSSMManagedInstanceCore"
 }
 
-
 resource "aws_iam_role" "ssm_role" {
   # 信頼ポリシー
   name = "${var.poject}-ec2-ssm-role"
@@ -31,5 +30,3 @@ resource "aws_iam_role_policy_attachment" "allow_ssm_policy" {
   role       = aws_iam_role.ssm_role.name
   policy_arn = data.aws_iam_policy.ssm_managed_instancecore.arn 
 }
-
-

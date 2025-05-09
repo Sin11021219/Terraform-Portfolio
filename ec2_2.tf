@@ -1,6 +1,6 @@
 #===============================================================
 #EC2
-#================================================================
+#===============================================================
 #最新のAMI IDを取得
 data "aws_ssm_parameter" "amzn2_ami" {
     name = "/aws/server/ami-amazon-linux-latest/ammzn2-ami-hvm-x86_64-gp2"
@@ -28,8 +28,6 @@ resource "aws_instance" "webserver_ec2_1" {
     }
 }
 
-
-
 #2台目のEC2
 resource "aws_instance" "webserver_ec2_2" {
     ami                         = data.aws_ssm_parameter.aman2_ami.value
@@ -52,10 +50,11 @@ resource "aws_instance" "webserver_ec2_2" {
     }
 }
 
-
-
 # Insatance Profile
 resource "aws_iam_instance_profile" "ssm_instance_profile" {
     role = aws_iam_role.ssm_role.name
     name = aws_iam_role.ssm_role.name
 }
+
+
+
