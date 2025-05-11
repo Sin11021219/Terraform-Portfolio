@@ -51,3 +51,4 @@ variable "myip" {
 variable "domain" {
   type = string
 }
+
