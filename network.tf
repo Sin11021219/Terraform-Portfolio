@@ -85,6 +85,7 @@ resource "aws_route_table" "cloudtech_public_rtb" {
     Type    = "public"
   }
 }
+
 # サブネットへの関連付け
 resource "aws_route_table_association" "public_rtb_1a" {
   route_table_id = aws_route_table.cloudtech_public_rtb.id
