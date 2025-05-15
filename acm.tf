@@ -48,7 +48,6 @@ resource "aws_acm_certificate_validation" "cert_valid" {
   validation_record_fqdns = [for record in aws_route53_record.route53_acm_resolve : record.fqdn]
 }
 
-
 # CloudFront用 ACM証明書 (バージニアリージョン)
 resource "aws_acm_certificate" "virginia_cert" {
   provider = aws.virginia
@@ -72,5 +71,3 @@ resource "aws_acm_certificate" "virginia_cert" {
     aws_route53_zone.route53_zone
   ]
 }
-
-
