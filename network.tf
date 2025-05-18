@@ -23,7 +23,6 @@ resource "aws_vpc" "cloudtech_vpc" {
 #------------------------------------
 resource "aws_subnet" "cloudtech_subnet_public1" {
   vpc_id = aws_vpc.cloudtech_vpc.id
-  # availability_zone_id = "apne1-az4"
   availability_zone       = "ap-northeast-1a"
   cidr_block              = "10.0.0.0/24"
   map_public_ip_on_launch = true
@@ -37,7 +36,6 @@ resource "aws_subnet" "cloudtech_subnet_public1" {
 resource "aws_subnet" "cloudtech_subnet_public2" {
   vpc_id            = aws_vpc.cloudtech_vpc.id
   availability_zone = "ap-northeast-1c"
-  # availability_zone_id    = "apne1-az1"
   cidr_block              = "10.0.1.0/24"
   map_public_ip_on_launch = true
   tags = {
@@ -50,7 +48,6 @@ resource "aws_subnet" "cloudtech_subnet_public2" {
 resource "aws_subnet" "cloudtech_subnet_private1" {
   vpc_id            = aws_vpc.cloudtech_vpc.id
   availability_zone = "ap-northeast-1a"
-  # availability_zone_id    = "apne1-az4"
   cidr_block              = "10.0.2.0/24"
   map_public_ip_on_launch = false
   tags = {
@@ -63,7 +60,6 @@ resource "aws_subnet" "cloudtech_subnet_private1" {
 resource "aws_subnet" "cloudtech_subnet_private2" {
   vpc_id            = aws_vpc.cloudtech_vpc.id
   availability_zone = "ap-northeast-1c"
-  # availability_zone_id    = "apne1-az1"
   cidr_block              = "10.0.3.0/24"
   map_public_ip_on_launch = false
   tags = {

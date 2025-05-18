@@ -119,3 +119,5 @@ resource "aws_security_group_rule" "ingress_from_alb_to_ec2" {
   # ALBのセキュリティグループからインバウンドを許可
   source_security_group_id = aws_security_group.cloudtech_alb_sg.id
 }
+
+
