@@ -18,6 +18,7 @@ resource "aws_vpc" "cloudtech_vpc" {
     Project = var.project
   }
 }
+
 #------------------------------------
 # Subnet
 #------------------------------------
