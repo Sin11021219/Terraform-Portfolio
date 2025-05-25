@@ -3,9 +3,9 @@
 
 # __generated__ by Terraform
 
-#------------------------------------
+#-------------------------------------
 # VPC
-#------------------------------------
+#-------------------------------------
 resource "aws_vpc" "cloudtech_vpc" {
   assign_generated_ipv6_cidr_block     = false
   cidr_block                           = "10.0.0.0/21"
@@ -19,9 +19,9 @@ resource "aws_vpc" "cloudtech_vpc" {
   }
 }
 
-#------------------------------------
+#-------------------------------------
 # Subnet
-#------------------------------------
+#-------------------------------------
 resource "aws_subnet" "cloudtech_subnet_public1" {
   vpc_id = aws_vpc.cloudtech_vpc.id
   availability_zone       = "ap-northeast-1a"
@@ -70,9 +70,9 @@ resource "aws_subnet" "cloudtech_subnet_private2" {
   }
 }
 
-#------------------------------------
+#-------------------------------------
 # RouteTable
-#------------------------------------
+#-------------------------------------
 # インターネットゲートウェイに向けるルートテーブル
 resource "aws_route_table" "cloudtech_public_rtb" {
   vpc_id = aws_vpc.cloudtech_vpc.id
@@ -113,9 +113,9 @@ resource "aws_route_table_association" "private_rtb_1c" {
   subnet_id      = aws_subnet.cloudtech_subnet_private2.id
 }
 
-#------------------------------------
+#-------------------------------------
 # Internet Gateway
-#------------------------------------
+#-------------------------------------
 resource "aws_internet_gateway" "cloudtech_igw" {
   vpc_id = aws_vpc.cloudtech_vpc.id
   tags = {

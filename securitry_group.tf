@@ -1,6 +1,6 @@
-#------------------------------------
+#-------------------------------------
 # EC2 SSM Security Group
-#------------------------------------
+#-------------------------------------
 resource "aws_security_group" "cloudtech_ec2_ssm_sg" {
   name        = "${var.project}-ec2-ssm-sg"
   description = "SystemsManager SessionManager"
@@ -21,9 +21,9 @@ resource "aws_security_group_rule" "egress_all" {
   cidr_blocks       = ["0.0.0.0/0"]
 }
 
-#------------------------------------
+#-------------------------------------
 # VPC Endpoint Security Group
-#------------------------------------
+#-------------------------------------
 resource "aws_security_group" "cloudtech_vpc_endpoint_ssm_sg" {
   name        = "${var.project}-vpc-endpoint-ssm-sg"
   description = "SystemsManager SessionManager"
@@ -53,10 +53,10 @@ resource "aws_security_group_rule" "egress_vpc_endpoint" {
   cidr_blocks       = ["0.0.0.0/0"]
 }
 
-#------------------------------------
+#-------------------------------------
 # ALB Security Group
 # インバウンド: 80, 443
-#------------------------------------
+#-------------------------------------
 resource "aws_security_group" "cloudtech_alb_sg" {
   name        = "${var.project}-alb-sg"
   description = "alb"
