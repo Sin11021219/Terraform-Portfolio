@@ -31,5 +31,3 @@ resource "aws_iam_role_policy_attachment" "allow_ssm_policy" {
 }
 
 
-
-
